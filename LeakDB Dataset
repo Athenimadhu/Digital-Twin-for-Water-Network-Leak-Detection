@@ -1,0 +1,58 @@
+## Dataset
+
+This project uses the **LeakDB** dataset, a benchmark dataset designed for water distribution network leak detection research. The dataset contains hydraulic measurements collected under both normal and leak conditions.
+
+### Dataset Source
+
+LeakDB Dataset (Kaggle):
+https://www.kaggle.com/datasets/arnav1911/a-generalized-framework-for-optimization-datasets
+
+### Dataset Description
+
+Original dataset shape:
+
+* Rows: 566,745
+* Columns: 7
+
+After data cleaning:
+
+* Rows: 559,798
+* Columns: 7
+
+Features used:
+
+1. AvgDemand_PercentDiff
+2. AvgPressure_PercentDiff
+3. Link1_PercentDiff
+4. Link2_PercentDiff
+5. Link3_PercentDiff
+6. Link4_PercentDiff
+
+Target Variable:
+
+* Leak = 1 (Leak detected)
+* Leak = 0 (No leak)
+
+### Class Distribution
+
+| Class       |   Count |
+| ----------- | ------: |
+| No Leak (0) | 548,364 |
+| Leak (1)    |  11,434 |
+
+The dataset is highly imbalanced, with leak events representing approximately 2% of the total samples. This imbalance presents a significant challenge for deep learning models and makes metrics such as Precision, Recall, F1-Score, and ROC-AUC more informative than accuracy alone.
+
+### Data Preprocessing
+
+The following preprocessing steps were applied:
+
+* Removed missing and invalid records
+* Selected six hydraulic features
+* Normalised feature values using StandardScaler
+* Split data into training (80%) and testing (20%) sets
+* Created time-series sequences with window sizes of 10, 20, and 30 for LSTM and CNN-LSTM models
+
+Final feature matrix shape:
+
+* Features: (559,798, 6)
+* Target: (559,798,)
